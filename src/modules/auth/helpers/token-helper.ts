@@ -1,10 +1,8 @@
 import jwt from 'jsonwebtoken'
+import { tokenEnv } from '../../commons/env';
 import { IAuthData } from "../../domain";
 
-const TOKEN_KEY = "!@#$s1573m45-+==%"
-const TOKEN_EXPIRATION_TIME = 600
-
 export const createAuthToken = (payload: IAuthData): string => {
-  return jwt.sign(payload, TOKEN_KEY,
-    { subject: payload.userId, expiresIn: TOKEN_EXPIRATION_TIME })
+  return jwt.sign(payload, tokenEnv.key,
+    { subject: payload.userId, expiresIn: tokenEnv.expirationTime })
 }

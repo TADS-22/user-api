@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt'
-
-const ENCRYPT_SALT = 10
+import { encryptEnv } from '../../commons/env';
 
 export const encrypt = (data: string): string => {
-  return bcrypt.hashSync(data, ENCRYPT_SALT);
+  return bcrypt.hashSync(data, encryptEnv.salt);
 }
 
 export const compare = (source: string, target: string): boolean => {
