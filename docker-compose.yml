@@ -1,0 +1,25 @@
+version: '2.8'
+
+services:
+  mongodb:
+    image: mongo:6
+    restart: unless-stopped
+    ports:
+      - 27017:27100
+    volumes:
+      - db:/data/db
+
+  app:
+    depends_on:
+      - mongodb
+    build: .
+    restart: unless-stopped
+    ports:
+      - 3001:3001
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+
+volumes:
+  db:
